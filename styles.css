@@ -1,0 +1,173 @@
+/* Basic styles for layout and visual appeal */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f3f6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2874F0;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+nav a.active {
+    background-color: #0056b3;
+    font-weight: bold;
+    border-bottom: 3px solid #ffc107;
+}
+
+section {
+    padding: 20px;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items in the container */
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 250px; /* Set a fixed width for product cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    transition: transform 0.2s; /* Smooth transform effect on hover */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-card h3 {
+    font-size: 1.2em; /* Slightly larger title */
+    margin: 10px 0; /* Space around the title */
+}
+
+.product-card p {
+    font-weight: bold; /* Bold price */
+    color: #2874F0; /* Price color */
+}
+
+button {
+    background-color: #2874F0;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.checkout-btn {
+    background-color: #2874F0;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+}
+
+.cart-container {
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Product Catalog Styles */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the products in the container */
+    gap: 20px; /* Add space between the products */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 250px; /* Fixed width for each product card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth hover transition */
+    display: flex;
+    flex-direction: column; /* Ensure image is shown first, then details */
+    align-items: center; /* Center content horizontally */
+}
+
+.product-card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+}
+
+.product-card img {
+    width: 100%; /* Make image responsive */
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Add space between image and product details */
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333; /* Darker color for the product title */
+}
+
+.product-card p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2874F0; /* Brand color for the price */
+    margin-bottom: 15px; /* Space between price and button */
+}
+
+.add-to-cart-btn {
+    background-color: #2874F0;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #0056b3;
+}
