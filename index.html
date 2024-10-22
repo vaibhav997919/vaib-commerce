@@ -18,12 +18,11 @@
             </ul>
         </nav>
     </header>
-
-    <!-- User Section -->
+    
     <section id="user-section">
         <h2>Product Catalog</h2>
+        <h4>add your product on seller page then remove defaul product and show your product</h4>
         <div id="user-product-list" class="product-container">
-            <!-- Product Cards will be dynamically inserted here via JS -->
         </div>
         <h3>Cart</h3>
         <div id="cart-items" class="cart-container"></div>
@@ -31,10 +30,9 @@
         <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
     </section>
     
-
-    <!-- Seller Registration Section -->
     <section id="seller-register-section" style="display:none;">
         <h2>Seller Registration</h2>
+        <h4>register now and use seller dashboard</h4>
         <form id="seller-register-form">
             <label for="register-username">Username:</label>
             <input type="text" id="register-username" required><br>
@@ -49,9 +47,9 @@
         </form>
     </section>
 
-    <!-- Seller Login Section -->
     <section id="seller-login-section" style="display:none;">
         <h2>Seller Login</h2>
+        <h4>register on seller-Registration page than login</h4>
         <form id="seller-login-form">
             <label for="seller-username">Username:</label>
             <input type="text" id="seller-username" required><br>
@@ -64,7 +62,6 @@
         <p><a href="#" id="forgot-password">Forgot Password?</a></p>
     </section>
 
-    <!-- Seller Dashboard Section -->
     <section id="seller-section" style="display:none;">
         <h2>Seller Dashboard</h2>
     
@@ -85,31 +82,29 @@
         <div id="seller-product-list" class="product-container"></div>
     </section>
 
-    <!-- Admin Login Section -->
     <section id="admin-login-section" style="display:none;">
         <h2>Admin Login</h2>
+        <h4>give access to remove any product and remove any seller</h4>
         <form id="admin-login-form">
             <label for="admin-username">Username:</label>
             <input type="text" id="admin-username" required><br>
 
             <label for="admin-password">Password:</label>
             <input type="password" id="admin-password" required><br>
+            <h6> Username : owner <br> password : owner123</h6>
 
             <button type="submit" class="login-btn">Login</button>
         </form>
     </section>
 
-    <!-- Admin Panel -->
     <section id="admin-section" style="display:none;">
         <h2>Admin Panel - Manage Sellers & Products</h2>
         
-        <!-- Seller Management -->
         <div>
             <h3>Remove Sellers</h3>
             <div id="admin-seller-list" class="shop-container"></div>
         </div>
         
-        <!-- Product Management -->
         <div>
             <h3>Remove Products</h3>
             <div id="admin-product-list" class="product-container"></div>
