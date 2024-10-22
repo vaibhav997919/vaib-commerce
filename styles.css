@@ -1,11 +1,12 @@
-/* Basic styles for layout and visual appeal */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f3f6;
     margin: 0;
     padding: 0;
+    background-color: #f1f3f6;
 }
 
+/* Header */
 header {
     background-color: #2874F0;
     color: white;
@@ -13,82 +14,98 @@ header {
     text-align: center;
 }
 
+/* Navigation */
+nav {
+    background-color: #333;
+}
+
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+    flex: 1;
+    text-align: center;
 }
 
 nav a {
+    display: block;
     color: white;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
+    transition: background-color 0.3s ease; /* Add transition for smoother hover effect */
 }
 
-nav a.active {
+nav a:hover, nav a.active {
     background-color: #0056b3;
     font-weight: bold;
-    border-bottom: 3px solid #ffc107;
+    border-bottom: 3px solid #ffc107; /* Active link highlight */
 }
 
-section {
-    padding: 20px;
-}
-
+/* Product Cards */
 .product-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center items in the container */
+    justify-content: center; 
+    gap: 20px; 
+    padding: 20px;
 }
 
 .product-card {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
-    margin: 10px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
-    width: 250px; /* Set a fixed width for product cards */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-    transition: transform 0.2s; /* Smooth transform effect on hover */
+    width: 250px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .product-card:hover {
-    transform: scale(1.05); /* Scale up on hover */
+    transform: translateY(-10px);
 }
 
 .product-card img {
-    width: 100%;
+    width: 100%; 
     height: auto;
     border-radius: 5px;
+    margin-bottom: 15px; 
 }
 
 .product-card h3 {
-    font-size: 1.2em; /* Slightly larger title */
-    margin: 10px 0; /* Space around the title */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333; 
 }
 
 .product-card p {
-    font-weight: bold; /* Bold price */
-    color: #2874F0; /* Price color */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2874F0; 
+    margin-bottom: 15px; 
 }
 
-button {
+/* Buttons */
+button, .add-to-cart-btn {
     background-color: #2874F0;
     color: white;
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth background transition */
+    transition: background-color 0.3s ease; 
 }
 
-button:hover {
+button:hover, .add-to-cart-btn:hover {
     background-color: #0056b3;
 }
 
@@ -100,6 +117,7 @@ button:hover {
     background-color: #dc3545;
 }
 
+/* Cart */
 .cart-container {
     margin-top: 20px;
 }
@@ -110,64 +128,40 @@ button:hover {
     align-items: center;
 }
 
-/* Product Catalog Styles */
-.product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the products in the container */
-    gap: 20px; /* Add space between the products */
-    padding: 20px;
-    margin-top: 20px;
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Stack nav items */
+    }
+
+    .product-card {
+        width: 90%;            /* Use more width on smaller screens */
+        margin: 10px auto;    /* Center the card */
+    }
+
+    header {
+        font-size: 1.5rem; /* Adjust header font size */
+    }
+
+    button {
+        width: 100%; /* Full-width buttons for easier tapping */
+    }
 }
 
-.product-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    width: 250px; /* Fixed width for each product card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.3s ease; /* Smooth hover transition */
-    display: flex;
-    flex-direction: column; /* Ensure image is shown first, then details */
-    align-items: center; /* Center content horizontally */
-}
+@media (max-width: 480px) {
+    nav ul {
+        font-size: 14px; /* Smaller font size for nav */
+    }
 
-.product-card:hover {
-    transform: translateY(-10px); /* Lift the card on hover */
-}
+    header {
+        font-size: 1.25rem; /* Smaller header font size */
+    }
 
-.product-card img {
-    width: 100%; /* Make image responsive */
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 15px; /* Add space between image and product details */
-}
+    .product-card {
+        padding: 10px; /* Reduce padding in product cards */
+    }
 
-.product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #333; /* Darker color for the product title */
-}
-
-.product-card p {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #2874F0; /* Brand color for the price */
-    margin-bottom: 15px; /* Space between price and button */
-}
-
-.add-to-cart-btn {
-    background-color: #2874F0;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-    background-color: #0056b3;
+    button {
+        font-size: 14px; /* Smaller button font size */
+    }
 }
