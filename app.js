@@ -1,29 +1,40 @@
 let sellers = JSON.parse(localStorage.getItem('sellers')) || [];
 let products = JSON.parse(localStorage.getItem('products')) || [];
-let cart = JSON.parse(localStorage.getItem('cart')) || []; // Initialize the cart only once
-const ownerCredentials = { username: "admin", password: "admin123" }; // Admin credentials
+let cart = JSON.parse(localStorage.getItem('cart')) || []; 
+const ownerCredentials = { username: "owner", password: "owner123" }; 
 
-// Function to show sections based on active tab and change active tab styling
+
+const defaultProducts = [
+    { name: 'wollet', price: 100, image: 'https://media.istockphoto.com/id/483259035/photo/lost-wallet.jpg?s=612x612&w=0&k=20&c=4QjaGx8aynubb3e5e2nnAoZAL2pSmBthEGNT9H1ZCYk=' },
+    { name: 'watch', price: 200, image: 'https://cdn.pixabay.com/photo/2015/09/09/02/03/clock-931027_640.jpg' },
+    { name: 'Wooden Cubes', price: 300, image: 'https://t3.ftcdn.net/jpg/09/69/36/16/360_F_969361663_osjJ97qJMqwpLiUdYdiuIlTz6BpdFiJp.jpg' },
+    { name: 'Coffee Can', price: 400, image: 'https://cdn.pixabay.com/photo/2016/09/30/11/13/coffee-tin-1705026_640.jpg' },
+    { name: 'electronic combo', price: 500, image: 'https://thumbs.dreamstime.com/b/overhead-various-electronic-gadgets-wooden-plank-various-electronic-gadgets-wooden-plank-101116186.jpg' },
+    { name: 'mic', price: 600, image: 'https://pngimg.com/uploads/microphone/small/microphone_PNG7923.png' },
+    { name: 'scanner', price: 700, image: 'https://www.pngmart.com/files/7/Computer-Scanner-Transparent-Images-PNG.png' },
+    { name: 'headphones', price: 800, image: 'https://img.freepik.com/free-photo/still-life-wireless-cyberpunk-headphones_23-2151072201.jpg?size=626&ext=jpg' },
+];
+
 function showSection(sectionId, activeTab) {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav ul li a');
-    
-    sections.forEach(section => section.style.display = 'none');  // Hide all sections
-    navLinks.forEach(link => link.classList.remove('active'));    // Remove active from all tabs
-    
-    document.getElementById(sectionId).style.display = 'block';    // Show the required section
-    document.getElementById(activeTab).classList.add('active');    // Highlight the active tab
+
+    sections.forEach(section => section.style.display = 'none');  
+    navLinks.forEach(link => link.classList.remove('active'));    
+
+    document.getElementById(sectionId).style.display = 'block';    
+    document.getElementById(activeTab).classList.add('active');    
 }
 
-// Set default active page and tab on load (Shop page)
-window.onload = function() {
+window.onload = function () {
     showSection('user-section', 'user-tab');
     displayUserProducts();
+    displayCartItems(); 
 };
 
-// Event listeners for navigation tabs
 document.getElementById('user-tab').addEventListener('click', () => {
     showSection('user-section', 'user-tab');
+    displayUserProducts();
 });
 
 document.getElementById('seller-tab').addEventListener('click', () => {
@@ -38,8 +49,7 @@ document.getElementById('admin-tab').addEventListener('click', () => {
     showSection('admin-login-section', 'admin-tab');
 });
 
-// Add new seller
-document.getElementById('seller-register-form').addEventListener('submit', function(event) {
+document.getElementById('seller-register-form').addEventListener('submit', function (event) {
     event.preventDefault();
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
@@ -53,26 +63,22 @@ document.getElementById('seller-register-form').addEventListener('submit', funct
     showSection('seller-login-section', 'seller-tab');
 });
 
-// Seller login
-document.getElementById('seller-login-form').addEventListener('submit', function(event) {
+document.getElementById('seller-login-form').addEventListener('submit', function (event) {
     event.preventDefault();
     const username = document.getElementById('seller-username').value;
     const password = document.getElementById('seller-password').value;
 
-    // Check if the seller exists with correct credentials
     const seller = sellers.find(s => s.username === username && s.password === password);
 
     if (seller) {
-        // Successfully logged in, display the seller dashboard
         showSection('seller-section', 'seller-tab');
-        displaySellerProducts(seller);  // Load seller products
+        displaySellerProducts(seller);
     } else {
         alert("Invalid seller credentials. Please try again.");
     }
 });
 
-// Forgot password functionality
-document.getElementById('forgot-password').addEventListener('click', function() {
+document.getElementById('forgot-password').addEventListener('click', function () {
     const username = prompt("Enter your username to retrieve your password:");
     const seller = sellers.find(s => s.username === username);
     if (seller) {
@@ -82,7 +88,6 @@ document.getElementById('forgot-password').addEventListener('click', function() 
     }
 });
 
-// Display seller's products
 function displaySellerProducts(seller) {
     const sellerProductList = document.getElementById('seller-product-list');
     sellerProductList.innerHTML = '';
@@ -99,40 +104,34 @@ function displaySellerProducts(seller) {
     });
 }
 
-// Add product functionality for seller
-document.getElementById('product-form').addEventListener('submit', function(event) {
+document.getElementById('product-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const productName = document.getElementById('product-name').value;
     const productPrice = parseFloat(document.getElementById('product-price').value);
     const productImage = document.getElementById('product-image').value;
-
-    // Get the currently logged-in seller
     const seller = sellers.find(s => s.username === document.getElementById('seller-username').value);
 
     if (seller) {
         const newProduct = { name: productName, price: productPrice, image: productImage };
-        
-        // Add product to seller's products
+
         seller.products.push(newProduct);
-        
-        // Add product to the global products list
+
         products.push(newProduct);
-        
-        // Save updated lists in localStorage
+
         localStorage.setItem('sellers', JSON.stringify(sellers));
         localStorage.setItem('products', JSON.stringify(products));
 
         alert("Product added successfully!");
-        displaySellerProducts(seller);  // Refresh seller products display
-        document.getElementById('product-form').reset();  // Clear the form fields
+        displaySellerProducts(seller);  
+        document.getElementById('product-form').reset();  
     } else {
         alert("Error: Seller not found.");
     }
 });
 
-// Admin login
-document.getElementById('admin-login-form').addEventListener('submit', function(event) {
+
+document.getElementById('admin-login-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const username = document.getElementById('admin-username').value;
@@ -141,13 +140,12 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
     if (username === ownerCredentials.username && password === ownerCredentials.password) {
         showSection('admin-section', 'admin-tab');
         displaySellersForAdmin();
-        displayProductsForAdmin(); // Display products for admin
-    } else {
+        displayProductsForAdmin(); 
+        } else {
         alert("Invalid admin credentials. Please try again.");
     }
 });
 
-// Display Sellers for Admin
 function displaySellersForAdmin() {
     const sellerContainer = document.getElementById('admin-seller-list');
     sellerContainer.innerHTML = '';
@@ -161,25 +159,22 @@ function displaySellersForAdmin() {
         sellerContainer.appendChild(sellerCard);
     });
 
-    // Add event listeners for "Remove Seller" buttons
     const removeSellerButtons = document.querySelectorAll('.remove-seller-btn');
     removeSellerButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const username = this.getAttribute('data-username');
             removeSeller(username);
         });
     });
 }
 
-// Remove Seller
 function removeSeller(username) {
     sellers = sellers.filter(seller => seller.username !== username);
     localStorage.setItem('sellers', JSON.stringify(sellers));
     alert("Seller removed successfully!");
-    displaySellersForAdmin(); // Refresh the admin seller display
+    displaySellersForAdmin(); 
 }
 
-// Display Products for Admin
 function displayProductsForAdmin() {
     const productContainer = document.getElementById('admin-product-list');
     productContainer.innerHTML = '';
@@ -195,116 +190,131 @@ function displayProductsForAdmin() {
         productContainer.appendChild(productCard);
     });
 
-    // Add event listeners for remove product buttons
-    const removeButtons = document.querySelectorAll('.remove-product-btn');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
+    const removeProductButtons = document.querySelectorAll('.remove-product-btn');
+    removeProductButtons.forEach(button => {
+        button.addEventListener('click', function () {
             const index = parseInt(this.getAttribute('data-index'));
             removeProduct(index);
         });
     });
 }
 
-// Remove product globally (for admin)
 function removeProduct(index) {
-    const productName = products[index].name;
-
-    // Remove the product from the global product list
-    products.splice(index, 1);
-
-    // Remove the product from all sellers' products
-    sellers.forEach(seller => {
-        seller.products = seller.products.filter(product => product.name !== productName);
-    });
-
-    // Update the localStorage
-    localStorage.setItem('products', JSON.stringify(products));
-    localStorage.setItem('sellers', JSON.stringify(sellers));
-
-    alert('Product removed successfully!');
-    displayProductsForAdmin(); // Refresh admin product list
+    products.splice(index, 1); 
+    localStorage.setItem('products', JSON.stringify(products)); 
+    alert("Product removed successfully!");
+    displayProductsForAdmin();
 }
 
-// Display products for user
 function displayUserProducts() {
-    const userProductList = document.getElementById('user-product-list');
-    userProductList.innerHTML = '';
+    const productList = document.getElementById('user-product-list');
+    productList.innerHTML = '';
 
-    products.forEach(product => {
+    const allProducts = products.length > 0 ? products : defaultProducts;
+
+    allProducts.forEach((product, index) => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
         productCard.innerHTML = `
             <h3>${product.name}</h3>
             <p>Price: ₹${product.price}</p>
             <img src="${product.image}" alt="${product.name}" style="width: 100px; height: auto;">
-            <button class="add-to-cart-btn" data-name="${product.name}" data-price="${product.price}">Add to Cart</button>
+            <button class="add-to-cart-btn" data-index="${index}">Add to Cart</button>
         `;
-        userProductList.appendChild(productCard);
+        productList.appendChild(productCard);
     });
 
-    // Add event listeners for "Add to Cart" buttons
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
     addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const name = this.getAttribute('data-name');
-            const price = this.getAttribute('data-price');
-            addToCart(name, price);
-        });
-    });
-}
-
-// Add to cart function
-function addToCart(name, price) {
-    cart.push({ name, price });
-    localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
-    alert(`${name} added to cart!`);
-    updateCartDisplay();
-}
-
-// Update cart display
-function updateCartDisplay() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = ''; // Clear previous items
-
-    let totalPrice = 0;
-
-    cart.forEach((item, index) => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            ${item.name} - ₹${item.price} 
-            <button class="remove-cart-btn" data-index="${index}">Remove</button>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-        totalPrice += parseFloat(item.price);
-    });
-
-    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
-
-    // Add event listeners for remove buttons
-    const removeButtons = document.querySelectorAll('.remove-cart-btn');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const index = parseInt(this.getAttribute('data-index'));
-            removeFromCart(index);
+            addToCart(index);
         });
     });
 }
 
-// Remove item from cart
-function removeFromCart(index) {
-    cart.splice(index, 1); // Remove the item from the cart array
-    localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
-    updateCartDisplay(); // Refresh the cart display
-    alert("Item removed from cart.");
+
+function addToCart(index) {
+    const product = products.length > 0 ? products[index] : defaultProducts[index];
+
+    if (!product) {
+        alert("Invalid product. Please try again.");
+        return; 
+    } 
+
+    const existingProduct = cart.find(item => item.name === product.name);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; 
+       } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart)); 
+    alert("Product added to cart successfully!");
+    displayCartItems(); 
 }
 
-// Checkout button functionality
-document.getElementById('checkout-btn').addEventListener('click', function() {
-    alert("Proceeding to checkout...");
-    // Implement checkout logic here
-});
+function displayCartItems() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
 
-// Initial display of user products
-showSection('user-section', 'user-tab');
-displayUserProducts();
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+    } else {
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <h4>${item.name}</h4>
+                <p>Price: ₹${item.price}</p>
+                <p>Quantity: ${item.quantity}</p>
+                <button class="remove-from-cart-btn" data-index="${index}">Remove from Cart</button>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        const removeFromCartButtons = document.querySelectorAll('.remove-from-cart-btn');
+        removeFromCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const index = parseInt(this.getAttribute('data-index'));
+                removeFromCart(index);
+            });
+        });
+    }
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Product removed from cart successfully!");
+    displayCartItems(); 
+}
+
+function removeProduct(index) {
+    const productToRemove = products[index]; 
+    products.splice(index, 1);
+    
+    sellers.forEach(seller => {
+        seller.products = seller.products.filter(product => product.name !== productToRemove.name);
+    });
+
+    localStorage.setItem('products', JSON.stringify(products));
+    localStorage.setItem('sellers', JSON.stringify(sellers)); 
+
+    alert("Product removed successfully!");
+    displayProductsForAdmin(); 
+    displaySellersForAdmin(); 
+}
+
+document.getElementById('checkout-btn').addEventListener('click', function() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add items to your cart before proceeding to checkout.");
+    } else {
+        alert("Proceeding to checkout...");
+
+        cart = []; 
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCartItems(); 
+    }
+});
