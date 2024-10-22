@@ -1,24 +1,18 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f1f3f6;
 }
-
-/* Header */
 header {
     background-color: #2874F0;
     color: white;
     padding: 20px;
     text-align: center;
 }
-
-/* Navigation */
 nav {
     background-color: #333;
 }
-
 nav ul {
     list-style: none;
     padding: 0;
@@ -26,28 +20,23 @@ nav ul {
     display: flex;
     justify-content: space-around;
 }
-
 nav ul li {
     flex: 1;
     text-align: center;
 }
-
 nav a {
     display: block;
     color: white;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s ease; /* Add transition for smoother hover effect */
+    transition: background-color 0.3s ease; 
 }
-
 nav a:hover, nav a.active {
     background-color: #0056b3;
     font-weight: bold;
-    border-bottom: 3px solid #ffc107; /* Active link highlight */
+    border-bottom: 3px solid #ffc107; 
 }
-
-/* Product Cards */
 .product-container {
     display: flex;
     flex-wrap: wrap;
@@ -55,7 +44,6 @@ nav a:hover, nav a.active {
     gap: 20px; 
     padding: 20px;
 }
-
 .product-card {
     background-color: white;
     border: 1px solid #ddd;
@@ -69,32 +57,26 @@ nav a:hover, nav a.active {
     flex-direction: column; 
     align-items: center; 
 }
-
 .product-card:hover {
     transform: translateY(-10px);
 }
-
 .product-card img {
     width: 100%; 
     height: auto;
     border-radius: 5px;
     margin-bottom: 15px; 
 }
-
 .product-card h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: #333; 
 }
-
 .product-card p {
     font-size: 1rem;
     font-weight: bold;
     color: #2874F0; 
     margin-bottom: 15px; 
 }
-
-/* Buttons */
 button, .add-to-cart-btn {
     background-color: #2874F0;
     color: white;
@@ -104,64 +86,49 @@ button, .add-to-cart-btn {
     cursor: pointer;
     transition: background-color 0.3s ease; 
 }
-
 button:hover, .add-to-cart-btn:hover {
     background-color: #0056b3;
 }
-
 .checkout-btn {
     background-color: #2874F0;
 }
-
 .remove-btn {
     background-color: #dc3545;
 }
-
-/* Cart */
 .cart-container {
     margin-top: 20px;
 }
-
 .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-/* Responsive Styles */
 @media (max-width: 768px) {
     nav ul {
-        flex-direction: column; /* Stack nav items */
-    }
-
+        flex-direction: column;
+        }
     .product-card {
-        width: 90%;            /* Use more width on smaller screens */
-        margin: 10px auto;    /* Center the card */
+        width: 90%;            
+        margin: 10px auto;    
     }
-
     header {
-        font-size: 1.5rem; /* Adjust header font size */
+        font-size: 1.5rem; 
     }
-
     button {
-        width: 100%; /* Full-width buttons for easier tapping */
+        width: 100%; 
     }
 }
-
 @media (max-width: 480px) {
     nav ul {
-        font-size: 14px; /* Smaller font size for nav */
+        font-size: 14px; 
     }
-
     header {
-        font-size: 1.25rem; /* Smaller header font size */
+        font-size: 1.25rem;
     }
-
     .product-card {
-        padding: 10px; /* Reduce padding in product cards */
+        padding: 10px;
     }
-
     button {
-        font-size: 14px; /* Smaller button font size */
+        font-size: 14px;
     }
 }
